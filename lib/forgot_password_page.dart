@@ -6,6 +6,7 @@ class ForgotPasswordPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         title: const Text(
           'Forgot Password',
@@ -54,12 +55,8 @@ class ForgotPasswordPage extends StatelessWidget {
               width: double.infinity,
               child: ElevatedButton(
                 onPressed: () {
-                  // TODO: Implement password reset logic
                   print('Send Reset Link button pressed');
-                  // Biasanya menampilkan pesan sukses atau navigasi kembali ke login
-                  Navigator.pop(
-                    context,
-                  ); // Kembali ke halaman sebelumnya (Sign In)
+                  Navigator.pop(context);
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.blue[800],

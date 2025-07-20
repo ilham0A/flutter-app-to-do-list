@@ -74,6 +74,7 @@ class AllTasksPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
@@ -143,14 +144,14 @@ class AllTasksPage extends StatelessWidget {
             ),
             _buildTaskCard(
               'Mobile App Development',
-              'Flutter',
+              'App Development',
               '14:00 - 17:00 am',
               'On Progress',
               Colors.blue[800]!,
             ),
             _buildTaskCard(
               'UI/UX Research',
-              'Design',
+              'UI/UX Designer',
               '15:00 - 18:00 am',
               'Completed',
               Colors.green,

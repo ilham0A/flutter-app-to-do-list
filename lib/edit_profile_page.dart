@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:uas_last/signin_page.dart'; // Import SignInPage for logout
+import 'package:uas_last/signin_page.dart';
 
 class EditProfilePage extends StatefulWidget {
   const EditProfilePage({super.key});
@@ -14,6 +14,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
@@ -44,7 +45,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
             ),
             const SizedBox(height: 20),
             TextFormField(
-              initialValue: 'Full name', // Placeholder
+              initialValue: 'Full name',
               decoration: InputDecoration(
                 hintText: 'Full name',
                 border: OutlineInputBorder(
@@ -61,7 +62,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
             ),
             const SizedBox(height: 16),
             TextFormField(
-              initialValue: '10/10/2000', // Placeholder
+              initialValue: '10/10/2000',
               decoration: InputDecoration(
                 hintText: 'Date of Birth',
                 border: OutlineInputBorder(
@@ -90,7 +91,6 @@ class _EditProfilePageState extends State<EditProfilePage> {
                 ),
                 GestureDetector(
                   onTap: () {
-                    // TODO: Implement change password flow
                     print('Change password tapped');
                   },
                   child: Text(
@@ -105,7 +105,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
             ),
             const SizedBox(height: 20),
             TextFormField(
-              initialValue: '************', // Placeholder
+              initialValue: '************',
               obscureText: !_isPasswordVisible,
               decoration: InputDecoration(
                 hintText: 'Password',
@@ -135,14 +135,12 @@ class _EditProfilePageState extends State<EditProfilePage> {
               ),
             ),
             const SizedBox(height: 30),
-            // Tombol "Confirmation"
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
                 onPressed: () {
-                  // TODO: Implement Save Confirmation logic
                   print('Confirmation button pressed');
-                  Navigator.pop(context); // Kembali ke halaman Profile
+                  Navigator.pop(context);
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.blue[800],
@@ -161,15 +159,12 @@ class _EditProfilePageState extends State<EditProfilePage> {
                 ),
               ),
             ),
-            const SizedBox(height: 16), // Tambahkan spasi
-            // Tombol "Log Out"
+            const SizedBox(height: 16),
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
                 onPressed: () {
-                  // TODO: Implement Log Out logic
                   print('Log Out button pressed');
-                  // Kembali ke halaman Sign In setelah Log Out
                   Navigator.pushAndRemoveUntil(
                     context,
                     MaterialPageRoute(builder: (context) => const SignInPage()),
@@ -177,7 +172,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                   );
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.red[600], // Warna merah untuk Log Out
+                  backgroundColor: Colors.red[600],
                   padding: const EdgeInsets.symmetric(vertical: 16),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8),

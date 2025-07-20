@@ -8,7 +8,7 @@ class LanguagePage extends StatefulWidget {
 }
 
 class _LanguagePageState extends State<LanguagePage> {
-  String _selectedLanguage = 'English (UK)'; // Default selected language
+  String _selectedLanguage = 'English (UK)';
 
   Widget _buildLanguageOption(String language, bool isSelected) {
     return GestureDetector(
@@ -50,6 +50,7 @@ class _LanguagePageState extends State<LanguagePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,

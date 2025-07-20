@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:uas_last/all_tasks_page.dart'; // <--- PASTIKAN PATH INI BENAR
+import 'package:uas_last/all_tasks_page.dart';
 
 class DashboardPage extends StatefulWidget {
   const DashboardPage({super.key});
@@ -12,6 +12,7 @@ class _DashboardPageState extends State<DashboardPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
@@ -24,31 +25,24 @@ class _DashboardPageState extends State<DashboardPage> {
           ),
         ),
         actions: [
-          // Ubah const menjadi non-const karena ada Image.asset yang bisa berubah
           Padding(
             padding: const EdgeInsets.only(right: 16.0),
             child: CircleAvatar(
-              radius: 25, // Radius disesuaikan agar tidak terlalu besar
-              backgroundColor:
-                  Colors
-                      .grey[200], // Background abu-abu jika gambar tidak muncul
-              // Menggunakan ClipOval dan Image.asset dengan errorBuilder untuk debugging gambar
+              radius: 25,
+              backgroundColor: Colors.grey[200],
+              // Coba tampilkan gambar hacker.jpg lagi
               child: ClipOval(
-                // Memastikan gambar terpotong bulat
                 child: Image.asset(
-                  'assets/images/', // Pastikan path dan nama file benar
-                  fit:
-                      BoxFit
-                          .cover, // Penting agar gambar mengisi area CircleAvatar
-                  width: 50, // Sesuaikan dengan radius * 2
-                  height: 50, // Sesuaikan dengan radius * 2
+                  'assets/images/hacker.jpg', // Pastikan path dan nama file benar
+                  fit: BoxFit.cover,
+                  width: 50,
+                  height: 50,
                   errorBuilder: (context, error, stackTrace) {
-                    // Jika gambar gagal dimuat, tampilkan ikon orang sebagai placeholder
-                    // Pesan error akan dicetak ke konsol debug Anda
-                    print('Error loading image: $error');
+                    // Ini akan mencetak error ke konsol debug Anda
+                    print('Error loading profile image (dashboard): $error');
                     return const Icon(
                       Icons.person,
-                      size: 40, // Ukuran ikon placeholder
+                      size: 40,
                       color: Colors.blueGrey,
                     );
                   },
@@ -99,7 +93,7 @@ class _DashboardPageState extends State<DashboardPage> {
                   ),
                   const SizedBox(width: 15),
                   _buildCategoryCard(
-                    'Web Development',
+                    'Web sekolah',
                     '24 Projects',
                     '45%',
                     Colors.purple[700]!,
@@ -114,6 +108,21 @@ class _DashboardPageState extends State<DashboardPage> {
                     Colors.green[200]!,
                   ),
                   const SizedBox(width: 15),
+                  _buildCategoryCard(
+                    'bug bounty',
+                    '3 Projects',
+                    '10%',
+                    const Color.fromARGB(255, 138, 56, 142)!,
+                    const Color.fromARGB(255, 220, 155, 219)!,
+                  ),
+                  const SizedBox(width: 15),
+                  _buildCategoryCard(
+                    'desain logo',
+                    '15 Projects',
+                    '90%',
+                    const Color.fromARGB(255, 7, 73, 188)!,
+                    const Color.fromARGB(255, 104, 118, 138)!,
+                  ),
                 ],
               ),
             ),
@@ -127,7 +136,6 @@ class _DashboardPageState extends State<DashboardPage> {
                 ),
                 TextButton(
                   onPressed: () {
-                    // Navigasi ke halaman AllTaskPage
                     Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -154,6 +162,13 @@ class _DashboardPageState extends State<DashboardPage> {
               title: 'Perawatan Server Singapura',
               category: 'Web Maintenance',
               time: '09:00 - 13:00 Am',
+              status: 'On Progress',
+              statusColor: Colors.blue,
+            ),
+            _buildTaskItem(
+              title: 'React JS for E-Commerce Web',
+              category: 'Web Design',
+              time: '08:00 - 10:00 Am',
               status: 'On Progress',
               statusColor: Colors.blue,
             ),

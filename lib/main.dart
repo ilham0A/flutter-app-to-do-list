@@ -4,7 +4,7 @@ import 'package:line_icons/line_icons.dart';
 import 'package:uas_last/dashboard_page.dart';
 import 'package:uas_last/profile_page.dart';
 import 'package:uas_last/add_task_page.dart';
-import 'package:uas_last/signin_page.dart'; // Import SignInPage
+import 'package:uas_last/signin_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -22,9 +22,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      // UBAH DI SINI: Atur SignInPage sebagai halaman awal aplikasi
-      home:
-          const SignInPage(), // Sekarang aplikasi akan dimulai dari SignInPage
+      home: const SignInPage(),
     );
   }
 }
@@ -37,16 +35,14 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-  int _selectedIndex = 0; // Indeks halaman yang sedang aktif
+  int _selectedIndex = 0;
 
-  final List<Widget> _pages = [
-    const DashboardPage(), // Index 0: Home / Dashboard
-    const ProfilePage(), // Index 1: Profile
-  ];
+  final List<Widget> _pages = [const DashboardPage(), const ProfilePage()];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: _pages[_selectedIndex],
 
       bottomNavigationBar: Container(

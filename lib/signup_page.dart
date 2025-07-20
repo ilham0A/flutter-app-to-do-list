@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/gestures.dart'; // Import for TapGestureRecognizer
+import 'package:flutter/gestures.dart';
 
-// Import halaman tujuan (sesuaikan dengan nama file yang Anda buat)
-import 'main.dart'; // Mengganti DashboardPage ke MainScreen untuk navigasi yang benar
-import 'signin_page.dart'; // Halaman Sign In
+import 'package:uas_last/main.dart';
+import 'package:uas_last/signin_page.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
@@ -19,11 +18,12 @@ class _SignUpPageState extends State<SignUpPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
-        automaticallyImplyLeading: false, // Menghilangkan tombol back default
+        automaticallyImplyLeading: false,
         backgroundColor: Colors.white,
         elevation: 0,
-        toolbarHeight: 0, // Sembunyikan AppBar
+        toolbarHeight: 0,
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(24.0),
@@ -41,7 +41,7 @@ class _SignUpPageState extends State<SignUpPage> {
             ),
             const SizedBox(height: 10),
             const Text(
-              'It was popularised in the 1960s with the release of Letraset sheetscontaining Lorem ipsum.',
+              'Daftar hari ini dan mulailah perjalanan Anda menuju organisasi yang lebih baik dan pencapaian yang luar biasa. Masa depan yang teratur menanti!',
               textAlign: TextAlign.center,
               style: TextStyle(fontSize: 14, color: Colors.grey),
             ),
@@ -51,7 +51,6 @@ class _SignUpPageState extends State<SignUpPage> {
                 Expanded(
                   child: OutlinedButton.icon(
                     onPressed: () {
-                      // TODO: Implement Facebook Sign Up
                       print('Sign Up with Facebook');
                     },
                     style: OutlinedButton.styleFrom(
@@ -62,17 +61,14 @@ class _SignUpPageState extends State<SignUpPage> {
                       ),
                     ),
                     icon: Image.asset(
-                      'assets/icons/facebook_logo.png', // Pastikan path dan nama file benar
+                      'assets/icons/facebook_icon.png',
                       height: 24,
                       width: 24,
                       errorBuilder: (context, error, stackTrace) {
                         print(
                           'Error loading Facebook logo in SignUpPage: $error',
                         );
-                        return const Icon(
-                          Icons.facebook,
-                          color: Colors.blue,
-                        ); // Placeholder ikon
+                        return const Icon(Icons.facebook, color: Colors.blue);
                       },
                     ),
                     label: const Text(
@@ -85,7 +81,6 @@ class _SignUpPageState extends State<SignUpPage> {
                 Expanded(
                   child: OutlinedButton.icon(
                     onPressed: () {
-                      // TODO: Implement Google Sign Up
                       print('Sign Up with Google');
                     },
                     style: OutlinedButton.styleFrom(
@@ -96,7 +91,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       ),
                     ),
                     icon: Image.asset(
-                      'assets/icons/google_logo.png', // Pastikan path dan nama file benar
+                      'assets/icons/google_icon.png',
                       height: 24,
                       width: 24,
                       errorBuilder: (context, error, stackTrace) {
@@ -106,7 +101,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         return const Icon(
                           Icons.g_mobiledata,
                           color: Colors.red,
-                        ); // Placeholder ikon
+                        );
                       },
                     ),
                     label: const Text(
@@ -118,7 +113,20 @@ class _SignUpPageState extends State<SignUpPage> {
               ],
             ),
             const SizedBox(height: 24),
-            const Text('Or', style: TextStyle(color: Colors.grey)),
+            Row(
+              children: [
+                const Expanded(
+                  child: Divider(color: Colors.grey, thickness: 1),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                  child: const Text('Or', style: TextStyle(color: Colors.grey)),
+                ),
+                const Expanded(
+                  child: Divider(color: Colors.grey, thickness: 1),
+                ),
+              ],
+            ),
             const SizedBox(height: 24),
             TextFormField(
               decoration: InputDecoration(
@@ -210,7 +218,6 @@ class _SignUpPageState extends State<SignUpPage> {
                           recognizer:
                               TapGestureRecognizer()
                                 ..onTap = () {
-                                  // TODO: Navigate to Terms of Service page
                                   print('Terms of Service tapped');
                                 },
                         ),
@@ -227,7 +234,6 @@ class _SignUpPageState extends State<SignUpPage> {
                           recognizer:
                               TapGestureRecognizer()
                                 ..onTap = () {
-                                  // TODO: Navigate to Privacy Policy page
                                   print('Privacy Policy tapped');
                                 },
                         ),
@@ -244,20 +250,17 @@ class _SignUpPageState extends State<SignUpPage> {
                 onPressed:
                     _agreeToTerms
                         ? () {
-                          // TODO: Implement Sign Up logic
                           print('Create Account button pressed');
-                          // Navigasi ke MainScreen setelah berhasil Sign Up
-                          // MainScreen adalah tempat BottomNavigationBar berada
                           Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(
                               builder:
                                   (context) =>
-                                      const MainScreen(), // <--- UBAH DI SINI
+                                      const SignInPage(), // Diarahkan ke SignInPage
                             ),
                           );
                         }
-                        : null, // Disable button if terms are not agreed
+                        : null,
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.blue[800],
                   padding: const EdgeInsets.symmetric(vertical: 16),
@@ -266,7 +269,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   ),
                 ),
                 child: const Text(
-                  'Create Account', // Perbaikan typo: "Create Account"
+                  'Create Account',
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
@@ -285,7 +288,6 @@ class _SignUpPageState extends State<SignUpPage> {
                 ),
                 GestureDetector(
                   onTap: () {
-                    // Navigasi ke halaman Sign In
                     Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(

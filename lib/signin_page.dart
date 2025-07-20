@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 
-// Import halaman tujuan setelah sign in (MainScreen)
-import 'main.dart'; // Import MainScreen
-import 'forgot_password_page.dart';
-import 'signup_page.dart';
+import 'package:uas_last/main.dart';
+import 'package:uas_last/forgot_password_page.dart';
+import 'package:uas_last/signup_page.dart';
 
 class SignInPage extends StatefulWidget {
   const SignInPage({super.key});
@@ -18,11 +17,12 @@ class _SignInPageState extends State<SignInPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
-        automaticallyImplyLeading: false, // Menghilangkan tombol back default
+        automaticallyImplyLeading: false,
         backgroundColor: Colors.white,
         elevation: 0,
-        toolbarHeight: 0, // Sembunyikan AppBar
+        toolbarHeight: 0,
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(24.0),
@@ -40,7 +40,7 @@ class _SignInPageState extends State<SignInPage> {
             ),
             const SizedBox(height: 10),
             const Text(
-              'It was popularised in the 1960s with the release of Letraset sheetscontaining Lorem ipsum.',
+              'Masuk dan kelola daftar tugas Anda, capai tujuan, dan raih potensi penuh Anda. Produktivitas ada di tangan Anda!',
               textAlign: TextAlign.center,
               style: TextStyle(fontSize: 14, color: Colors.grey),
             ),
@@ -50,7 +50,6 @@ class _SignInPageState extends State<SignInPage> {
                 Expanded(
                   child: OutlinedButton.icon(
                     onPressed: () {
-                      // TODO: Implement Facebook Sign In
                       print('Sign In with Facebook');
                     },
                     style: OutlinedButton.styleFrom(
@@ -61,8 +60,7 @@ class _SignInPageState extends State<SignInPage> {
                       ),
                     ),
                     icon: Image.asset(
-                      // PATH DIPERBAIKI: Hapus 'uasdpm/'
-                      'assets/icons/facebook_logo.png', // Pastikan Anda memiliki gambar logo Facebook di folder assets
+                      'assets/icons/facebook_icon.png',
                       height: 24,
                       width: 24,
                       errorBuilder: (context, error, stackTrace) {
@@ -80,7 +78,6 @@ class _SignInPageState extends State<SignInPage> {
                 Expanded(
                   child: OutlinedButton.icon(
                     onPressed: () {
-                      // TODO: Implement Google Sign In
                       print('Sign In with Google');
                     },
                     style: OutlinedButton.styleFrom(
@@ -91,8 +88,7 @@ class _SignInPageState extends State<SignInPage> {
                       ),
                     ),
                     icon: Image.asset(
-                      // PATH DIPERBAIKI: Pastikan hanya 'assets/icons/google_logo.png'
-                      'assets/icons/google_logo.png', // Pastikan Anda memiliki gambar logo Google di folder assets
+                      'assets/icons/google_icon.png',
                       height: 24,
                       width: 24,
                       errorBuilder: (context, error, stackTrace) {
@@ -100,7 +96,7 @@ class _SignInPageState extends State<SignInPage> {
                         return const Icon(
                           Icons.g_mobiledata,
                           color: Colors.red,
-                        ); // Placeholder ikon Google
+                        );
                       },
                     ),
                     label: const Text(
@@ -112,10 +108,23 @@ class _SignInPageState extends State<SignInPage> {
               ],
             ),
             const SizedBox(height: 24),
-            const Text('Or', style: TextStyle(color: Colors.grey)),
+            Row(
+              children: [
+                const Expanded(
+                  child: Divider(color: Colors.grey, thickness: 1),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                  child: const Text('Or', style: TextStyle(color: Colors.grey)),
+                ),
+                const Expanded(
+                  child: Divider(color: Colors.grey, thickness: 1),
+                ),
+              ],
+            ),
             const SizedBox(height: 24),
             TextFormField(
-              initialValue: 'aseppppkoplingg23@gmail.com', // Contoh value
+              initialValue: 'aseppppkoplingg23@gmail.com',
               keyboardType: TextInputType.emailAddress,
               decoration: InputDecoration(
                 hintText: 'Email/Phone Number',
@@ -133,7 +142,7 @@ class _SignInPageState extends State<SignInPage> {
             ),
             const SizedBox(height: 16),
             TextFormField(
-              initialValue: '********', // Contoh value
+              initialValue: '********',
               obscureText: !_isPasswordVisible,
               decoration: InputDecoration(
                 hintText: 'Password',
@@ -167,7 +176,6 @@ class _SignInPageState extends State<SignInPage> {
               alignment: Alignment.centerRight,
               child: GestureDetector(
                 onTap: () {
-                  // Navigasi ke halaman Forgot Password
                   Navigator.push(
                     context,
                     MaterialPageRoute(
@@ -190,10 +198,7 @@ class _SignInPageState extends State<SignInPage> {
               width: double.infinity,
               child: ElevatedButton(
                 onPressed: () {
-                  // TODO: Implement Sign In logic
                   print('Sign In button pressed');
-                  // Navigasi ke MainScreen setelah berhasil Sign In
-                  // MainScreen adalah tempat BottomNavigationBar berada
                   Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(builder: (context) => const MainScreen()),
@@ -226,7 +231,6 @@ class _SignInPageState extends State<SignInPage> {
                 ),
                 GestureDetector(
                   onTap: () {
-                    // Navigasi kembali ke halaman Sign Up
                     Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(

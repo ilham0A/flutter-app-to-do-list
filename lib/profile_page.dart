@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
-// Jika ProfilePage berdiri sendiri dengan nav bar, pastikan import ini
-// import 'package:kelompok8dpm/widgets/bottom_navigation_bar_widget.dart';
-// import 'package:kelompok8dpm/add_task_page.dart';
-
-import 'dashboard_page.dart'; // Navigasi kembali ke Dashboard
-import 'language_page.dart';
-import 'notification_page.dart';
-import 'edit_profile_page.dart';
+import 'package:uas_last/dashboard_page.dart';
+import 'package:uas_last/language_page.dart';
+import 'package:uas_last/notification_page.dart';
+import 'package:uas_last/edit_profile_page.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -16,18 +12,16 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-  // int _selectedIndex = 2; // Default selected index for Profile page, jika Profile punya nav bar sendiri
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios, color: Colors.black),
           onPressed: () {
-            // Kembali ke halaman sebelumnya, atau Dashboard jika dari MainWrapper
             Navigator.pop(context);
           },
         ),
@@ -42,11 +36,25 @@ class _ProfilePageState extends State<ProfilePage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            const CircleAvatar(
+            CircleAvatar(
               radius: 50,
-              backgroundImage: AssetImage(
-                'assets/images/hacker.jpg',
-              ), // Pastikan ada gambar profil di sini
+              backgroundColor: Colors.grey[200],
+              child: ClipOval(
+                child: Image.asset(
+                  'assets/images/hacker.jpg',
+                  fit: BoxFit.cover,
+                  width: 100,
+                  height: 100,
+                  errorBuilder: (context, error, stackTrace) {
+                    print('Error loading profile image in ProfilePage: $error');
+                    return const Icon(
+                      Icons.person,
+                      size: 80,
+                      color: Colors.blueGrey,
+                    );
+                  },
+                ),
+              ),
             ),
             const SizedBox(height: 10),
             const Text(
@@ -65,7 +73,6 @@ class _ProfilePageState extends State<ProfilePage> {
                   width: 120,
                   child: ElevatedButton(
                     onPressed: () {
-                      // Navigasi ke Edit Profile Page
                       Navigator.push(
                         context,
                         MaterialPageRoute(
@@ -95,7 +102,6 @@ class _ProfilePageState extends State<ProfilePage> {
                   child: IconButton(
                     icon: const Icon(Icons.person_add, color: Colors.black),
                     onPressed: () {
-                      // TODO: Add functionality for adding a friend
                       print('Add friend pressed');
                     },
                   ),
@@ -109,7 +115,6 @@ class _ProfilePageState extends State<ProfilePage> {
                   child: IconButton(
                     icon: const Icon(Icons.more_horiz, color: Colors.black),
                     onPressed: () {
-                      // TODO: Add more options
                       print('More options pressed');
                     },
                   ),
@@ -160,7 +165,6 @@ class _ProfilePageState extends State<ProfilePage> {
               title: 'Project',
               subtitle: 'All Project',
               onTap: () {
-                // TODO: Navigasi ke halaman Project (jika ada)
                 print('Project tapped');
               },
             ),
@@ -170,7 +174,6 @@ class _ProfilePageState extends State<ProfilePage> {
               title: 'Notification',
               subtitle: 'Notification',
               onTap: () {
-                // Navigasi ke Notification Page
                 Navigator.push(
                   context,
                   MaterialPageRoute(
@@ -185,7 +188,6 @@ class _ProfilePageState extends State<ProfilePage> {
               title: 'Language',
               subtitle: 'Language',
               onTap: () {
-                // Navigasi ke Language Page
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => const LanguagePage()),
@@ -198,7 +200,6 @@ class _ProfilePageState extends State<ProfilePage> {
               title: 'Settings',
               subtitle: 'notifications, password',
               onTap: () {
-                // Navigasi ke Edit Profile Page
                 Navigator.push(
                   context,
                   MaterialPageRoute(
@@ -210,7 +211,6 @@ class _ProfilePageState extends State<ProfilePage> {
           ],
         ),
       ),
-      // Bottom navigation bar akan dikontrol oleh MainWrapper
     );
   }
 

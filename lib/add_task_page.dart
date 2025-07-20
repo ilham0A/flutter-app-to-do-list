@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart'; // Impor ini akan bekerja setelah intl ditambahkan di pubspec.yaml
+import 'package:intl/intl.dart';
 
 class AddTaskPage extends StatefulWidget {
   const AddTaskPage({super.key});
@@ -9,19 +9,19 @@ class AddTaskPage extends StatefulWidget {
 }
 
 class _AddTaskPageState extends State<AddTaskPage> {
-  DateTime _selectedDate = DateTime.now(); // Default: hari ini
-  TimeOfDay _selectedTimeFrom = TimeOfDay.now(); // Default: waktu sekarang
-  TimeOfDay _selectedTimeTo = TimeOfDay.now(); // Default: waktu sekarang
+  DateTime _selectedDate = DateTime.now();
+  TimeOfDay _selectedTimeFrom = TimeOfDay.now();
+  TimeOfDay _selectedTimeTo = TimeOfDay.now();
 
   final List<String> _categories = [
-    'UI Design',
+    'Design Logo',
     'Web Design',
     'Designer',
-    'Design Covid 19',
+    'Web Maintenance',
     'UI/UX Designer',
     'Website',
-    'COVID',
-    'UI/UX Designer',
+    'Bug Bounty',
+    'App Development',
   ];
   String? _selectedCategory;
 
@@ -100,6 +100,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
     final DateTime tomorrow = DateTime.now().add(const Duration(days: 1));
 
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
