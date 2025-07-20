@@ -1,6 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:uas_last/all_tasks_page.dart';
 
+class Task {
+  final String title;
+  final String category;
+  final String time;
+  final String status;
+  final Color statusColor;
+
+  Task({
+    required this.title,
+    required this.category,
+    required this.time,
+    required this.status,
+    required this.statusColor,
+  });
+}
+
 class DashboardPage extends StatefulWidget {
   const DashboardPage({super.key});
 
@@ -9,6 +25,59 @@ class DashboardPage extends StatefulWidget {
 }
 
 class _DashboardPageState extends State<DashboardPage> {
+  final TextEditingController _searchController = TextEditingController();
+  List<Task> _allTasks = [];
+  List<Task> _filteredTasks = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _allTasks = [
+      Task(
+        title: 'Wab Perusahaan Minyak Bumi',
+        category: 'Web Design',
+        time: '10:00 - 12:30 Am',
+        status: 'On Progress',
+        statusColor: Colors.blue,
+      ),
+      Task(
+        title: 'Mobile App Development',
+        category: 'App Development',
+        time: '09:00 - 13:00 Am',
+        status: 'On Progress',
+        statusColor: Colors.blue,
+      ),
+      Task(
+        title: 'Test 3 Website',
+        category: 'Bug Bounty',
+        time: '08:00 - 10:00 Am',
+        status: 'On Progress',
+        statusColor: Colors.blue,
+      ),
+    ];
+    _filteredTasks = _allTasks;
+    _searchController.addListener(_filterTasks);
+  }
+
+  @override
+  void dispose() {
+    _searchController.removeListener(_filterTasks);
+    _searchController.dispose();
+    super.dispose();
+  }
+
+  void _filterTasks() {
+    String query = _searchController.text.toLowerCase();
+    setState(() {
+      _filteredTasks =
+          _allTasks.where((task) {
+            return task.title.toLowerCase().contains(query) ||
+                task.category.toLowerCase().contains(query) ||
+                task.status.toLowerCase().contains(query);
+          }).toList();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,15 +99,13 @@ class _DashboardPageState extends State<DashboardPage> {
             child: CircleAvatar(
               radius: 25,
               backgroundColor: Colors.grey[200],
-              // Coba tampilkan gambar hacker.jpg lagi
               child: ClipOval(
                 child: Image.asset(
-                  'assets/images/hacker.jpg', // Pastikan path dan nama file benar
+                  'assets/images/hacker.jpg',
                   fit: BoxFit.cover,
                   width: 50,
                   height: 50,
                   errorBuilder: (context, error, stackTrace) {
-                    // Ini akan mencetak error ke konsol debug Anda
                     print('Error loading profile image (dashboard): $error');
                     return const Icon(
                       Icons.person,
@@ -59,6 +126,7 @@ class _DashboardPageState extends State<DashboardPage> {
           children: [
             const SizedBox(height: 20),
             TextFormField(
+              controller: _searchController,
               decoration: InputDecoration(
                 hintText: 'Find your task',
                 prefixIcon: const Icon(Icons.search),
@@ -112,16 +180,16 @@ class _DashboardPageState extends State<DashboardPage> {
                     'bug bounty',
                     '3 Projects',
                     '10%',
-                    const Color.fromARGB(255, 138, 56, 142)!,
-                    const Color.fromARGB(255, 220, 155, 219)!,
+                    const Color.fromARGB(255, 138, 56, 142),
+                    const Color.fromARGB(255, 220, 155, 219),
                   ),
                   const SizedBox(width: 15),
                   _buildCategoryCard(
                     'desain logo',
                     '15 Projects',
                     '90%',
-                    const Color.fromARGB(255, 7, 73, 188)!,
-                    const Color.fromARGB(255, 104, 118, 138)!,
+                    const Color.fromARGB(255, 7, 73, 188),
+                    const Color.fromARGB(255, 104, 118, 138),
                   ),
                 ],
               ),
@@ -151,26 +219,20 @@ class _DashboardPageState extends State<DashboardPage> {
               ],
             ),
             const SizedBox(height: 15),
-            _buildTaskItem(
-              title: 'Wab Perusahaan Minyak Bumi',
-              category: 'Web Design',
-              time: '10:00 - 12:30 Am',
-              status: 'On Progress',
-              statusColor: Colors.blue,
-            ),
-            _buildTaskItem(
-              title: 'Perawatan Server Singapura',
-              category: 'Web Maintenance',
-              time: '09:00 - 13:00 Am',
-              status: 'On Progress',
-              statusColor: Colors.blue,
-            ),
-            _buildTaskItem(
-              title: 'React JS for E-Commerce Web',
-              category: 'Web Design',
-              time: '08:00 - 10:00 Am',
-              status: 'On Progress',
-              statusColor: Colors.blue,
+            ListView.builder(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              itemCount: _filteredTasks.length,
+              itemBuilder: (context, index) {
+                final task = _filteredTasks[index];
+                return _buildTaskItem(
+                  title: task.title,
+                  category: task.category,
+                  time: task.time,
+                  status: task.status,
+                  statusColor: task.statusColor,
+                );
+              },
             ),
           ],
         ),

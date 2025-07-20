@@ -1,7 +1,95 @@
 import 'package:flutter/material.dart';
 
-class AllTasksPage extends StatelessWidget {
+class Task {
+  final String title;
+  final String category;
+  final String time;
+  final String status;
+  final Color statusColor;
+
+  Task({
+    required this.title,
+    required this.category,
+    required this.time,
+    required this.status,
+    required this.statusColor,
+  });
+}
+
+class AllTasksPage extends StatefulWidget {
   const AllTasksPage({super.key});
+
+  @override
+  State<AllTasksPage> createState() => _AllTasksPageState();
+}
+
+class _AllTasksPageState extends State<AllTasksPage> {
+  final TextEditingController _searchController = TextEditingController();
+  List<Task> _allTasks = [];
+  List<Task> _filteredTasks = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _allTasks = [
+      Task(
+        title: 'Wab Perusahaan Minyak Bumi',
+        category: 'Web Design',
+        time: '10:00 - 12:30 am',
+        status: 'On Progress',
+        statusColor: Colors.blue[800]!,
+      ),
+      Task(
+        title: 'React JS for E-Commerce Web',
+        category: 'Web Design',
+        time: '08:00 - 10:00 am',
+        status: 'Completed',
+        statusColor: Colors.green,
+      ),
+      Task(
+        title: 'Mobile App Development',
+        category: 'App Development',
+        time: '14:00 - 17:00 am',
+        status: 'On Progress',
+        statusColor: Colors.blue[800]!,
+      ),
+      Task(
+        title: 'Test 3 Website',
+        category: 'Bug Bounty',
+        time: '08:00 - 13:00 am',
+        status: 'On Progress',
+        statusColor: Colors.blue[800]!,
+      ),
+      Task(
+        title: 'UI/UX Research',
+        category: 'UI/UX Designer',
+        time: '15:00 - 18:00 am',
+        status: 'Completed',
+        statusColor: Colors.green,
+      ),
+    ];
+    _filteredTasks = _allTasks;
+    _searchController.addListener(_filterTasks);
+  }
+
+  @override
+  void dispose() {
+    _searchController.removeListener(_filterTasks);
+    _searchController.dispose();
+    super.dispose();
+  }
+
+  void _filterTasks() {
+    String query = _searchController.text.toLowerCase();
+    setState(() {
+      _filteredTasks =
+          _allTasks.where((task) {
+            return task.title.toLowerCase().contains(query) ||
+                task.category.toLowerCase().contains(query) ||
+                task.status.toLowerCase().contains(query);
+          }).toList();
+    });
+  }
 
   Widget _buildTaskCard(
     String title,
@@ -96,6 +184,7 @@ class AllTasksPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             TextFormField(
+              controller: _searchController,
               decoration: InputDecoration(
                 hintText: 'Find your task',
                 prefixIcon: const Icon(Icons.search),
@@ -112,49 +201,29 @@ class AllTasksPage extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 20),
-            const Text(
-              'My Task  4',
-              style: TextStyle(
+            Text(
+              'My Task  ${_filteredTasks.length}',
+              style: const TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
                 color: Colors.black,
               ),
             ),
             const SizedBox(height: 20),
-            _buildTaskCard(
-              'Wab Perusahaan Minyak Bumi',
-              'Web Design',
-              '10:00 - 12:30 am',
-              'On Progress',
-              Colors.blue[800]!,
-            ),
-            _buildTaskCard(
-              'Perawatan Server Singapura',
-              'Web Maintenance',
-              '09:00 - 13:00 am',
-              'On Progress',
-              Colors.blue[800]!,
-            ),
-            _buildTaskCard(
-              'React JS for E-Commerce Web',
-              'Web Design',
-              '08:00 - 10:00 am',
-              'On Progress',
-              Colors.blue[800]!,
-            ),
-            _buildTaskCard(
-              'Mobile App Development',
-              'App Development',
-              '14:00 - 17:00 am',
-              'On Progress',
-              Colors.blue[800]!,
-            ),
-            _buildTaskCard(
-              'UI/UX Research',
-              'UI/UX Designer',
-              '15:00 - 18:00 am',
-              'Completed',
-              Colors.green,
+            ListView.builder(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              itemCount: _filteredTasks.length,
+              itemBuilder: (context, index) {
+                final task = _filteredTasks[index];
+                return _buildTaskCard(
+                  task.title,
+                  task.category,
+                  task.time,
+                  task.status,
+                  task.statusColor,
+                );
+              },
             ),
           ],
         ),
