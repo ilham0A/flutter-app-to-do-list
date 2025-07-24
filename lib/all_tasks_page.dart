@@ -35,7 +35,7 @@ class _AllTasksPageState extends State<AllTasksPage> {
       Task(
         title: 'Wab Perusahaan Minyak Bumi',
         category: 'Web Design',
-        time: '10:00 - 12:30 am',
+        time: '10:00 - 11:30 am',
         status: 'On Progress',
         statusColor: Colors.blue[800]!,
       ),
@@ -49,21 +49,21 @@ class _AllTasksPageState extends State<AllTasksPage> {
       Task(
         title: 'Mobile App Development',
         category: 'App Development',
-        time: '14:00 - 17:00 am',
+        time: '09:00 - 11:00 am',
         status: 'On Progress',
         statusColor: Colors.blue[800]!,
       ),
       Task(
         title: 'Test 3 Website',
         category: 'Bug Bounty',
-        time: '08:00 - 13:00 am',
+        time: '08:00 - 10:00 am',
         status: 'On Progress',
         statusColor: Colors.blue[800]!,
       ),
       Task(
         title: 'UI/UX Research',
         category: 'UI/UX Designer',
-        time: '15:00 - 18:00 am',
+        time: '03:00 - 06:00 pm',
         status: 'Completed',
         statusColor: Colors.green,
       ),
@@ -82,12 +82,11 @@ class _AllTasksPageState extends State<AllTasksPage> {
   void _filterTasks() {
     String query = _searchController.text.toLowerCase();
     setState(() {
-      _filteredTasks =
-          _allTasks.where((task) {
-            return task.title.toLowerCase().contains(query) ||
-                task.category.toLowerCase().contains(query) ||
-                task.status.toLowerCase().contains(query);
-          }).toList();
+      _filteredTasks = _allTasks.where((task) {
+        return task.title.toLowerCase().contains(query) ||
+            task.category.toLowerCase().contains(query) ||
+            task.status.toLowerCase().contains(query);
+      }).toList();
     });
   }
 
@@ -210,21 +209,52 @@ class _AllTasksPageState extends State<AllTasksPage> {
               ),
             ),
             const SizedBox(height: 20),
-            ListView.builder(
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              itemCount: _filteredTasks.length,
-              itemBuilder: (context, index) {
-                final task = _filteredTasks[index];
-                return _buildTaskCard(
-                  task.title,
-                  task.category,
-                  task.time,
-                  task.status,
-                  task.statusColor,
-                );
-              },
-            ),
+            _filteredTasks.isEmpty
+                ? Center(
+                    child: Padding(
+                      padding: const EdgeInsets.all(24.0),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(Icons.assignment,
+                              size: 80, color: Colors.grey[300]),
+                          const SizedBox(height: 16),
+                          Text(
+                            _searchController.text.isEmpty
+                                ? 'Belum ada tugas di sini!'
+                                : 'Tidak ada tugas yang cocok dengan pencarian Anda.',
+                            style: const TextStyle(
+                                fontSize: 18, color: Colors.grey),
+                            textAlign: TextAlign.center,
+                          ),
+                          const SizedBox(height: 8),
+                          Text(
+                            _searchController.text.isEmpty
+                                ? 'Coba kata kunci lain atau tambahkan tugas baru.'
+                                : 'Coba kata kunci lain atau tambahkan tugas baru.',
+                            style: const TextStyle(
+                                fontSize: 14, color: Colors.grey),
+                            textAlign: TextAlign.center,
+                          ),
+                        ],
+                      ),
+                    ),
+                  )
+                : ListView.builder(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemCount: _filteredTasks.length,
+                    itemBuilder: (context, index) {
+                      final task = _filteredTasks[index];
+                      return _buildTaskCard(
+                        task.title,
+                        task.category,
+                        task.time,
+                        task.status,
+                        task.statusColor,
+                      );
+                    },
+                  ),
           ],
         ),
       ),

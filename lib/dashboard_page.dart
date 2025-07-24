@@ -36,14 +36,14 @@ class _DashboardPageState extends State<DashboardPage> {
       Task(
         title: 'Wab Perusahaan Minyak Bumi',
         category: 'Web Design',
-        time: '10:00 - 12:30 Am',
+        time: '10:00 - 11.30: Am',
         status: 'On Progress',
         statusColor: Colors.blue,
       ),
       Task(
         title: 'Mobile App Development',
         category: 'App Development',
-        time: '09:00 - 13:00 Am',
+        time: '09:00 - 11:00 Am',
         status: 'On Progress',
         statusColor: Colors.blue,
       ),
@@ -69,12 +69,11 @@ class _DashboardPageState extends State<DashboardPage> {
   void _filterTasks() {
     String query = _searchController.text.toLowerCase();
     setState(() {
-      _filteredTasks =
-          _allTasks.where((task) {
-            return task.title.toLowerCase().contains(query) ||
-                task.category.toLowerCase().contains(query) ||
-                task.status.toLowerCase().contains(query);
-          }).toList();
+      _filteredTasks = _allTasks.where((task) {
+        return task.title.toLowerCase().contains(query) ||
+            task.category.toLowerCase().contains(query) ||
+            task.status.toLowerCase().contains(query);
+      }).toList();
     });
   }
 
@@ -128,7 +127,7 @@ class _DashboardPageState extends State<DashboardPage> {
             TextFormField(
               controller: _searchController,
               decoration: InputDecoration(
-                hintText: 'Find your task',
+                hintText: 'find your task',
                 prefixIcon: const Icon(Icons.search),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(8),
@@ -144,7 +143,7 @@ class _DashboardPageState extends State<DashboardPage> {
             ),
             const SizedBox(height: 20),
             const Text(
-              'Categories',
+              'Kategori',
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 15),
@@ -153,40 +152,40 @@ class _DashboardPageState extends State<DashboardPage> {
               child: Row(
                 children: [
                   _buildCategoryCard(
-                    'Web Design',
-                    '12 Projects',
+                    'Desain Web',
+                    '12 Proyek',
                     '60%',
                     Colors.blue[700]!,
                     Colors.blue[200]!,
                   ),
                   const SizedBox(width: 15),
                   _buildCategoryCard(
-                    'Web sekolah',
-                    '24 Projects',
+                    'Web Sekolah',
+                    '24 Proyek',
                     '45%',
                     Colors.purple[700]!,
                     Colors.purple[200]!,
                   ),
                   const SizedBox(width: 15),
                   _buildCategoryCard(
-                    'Mobile App',
-                    '8 Projects',
+                    'Aplikasi Seluler',
+                    '8 Proyek',
                     '75%',
                     Colors.green[700]!,
                     Colors.green[200]!,
                   ),
                   const SizedBox(width: 15),
                   _buildCategoryCard(
-                    'bug bounty',
-                    '3 Projects',
+                    'Bug Bounty',
+                    '3 Proyek',
                     '10%',
                     const Color.fromARGB(255, 138, 56, 142),
                     const Color.fromARGB(255, 220, 155, 219),
                   ),
                   const SizedBox(width: 15),
                   _buildCategoryCard(
-                    'desain logo',
-                    '15 Projects',
+                    'Desain Logo',
+                    '15 Proyek',
                     '90%',
                     const Color.fromARGB(255, 7, 73, 188),
                     const Color.fromARGB(255, 104, 118, 138),
@@ -212,28 +211,59 @@ class _DashboardPageState extends State<DashboardPage> {
                     );
                   },
                   child: Text(
-                    'View All',
+                    'All',
                     style: TextStyle(color: Colors.blue[800], fontSize: 14),
                   ),
                 ),
               ],
             ),
             const SizedBox(height: 15),
-            ListView.builder(
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              itemCount: _filteredTasks.length,
-              itemBuilder: (context, index) {
-                final task = _filteredTasks[index];
-                return _buildTaskItem(
-                  title: task.title,
-                  category: task.category,
-                  time: task.time,
-                  status: task.status,
-                  statusColor: task.statusColor,
-                );
-              },
-            ),
+            _filteredTasks.isEmpty
+                ? Center(
+                    child: Padding(
+                      padding: const EdgeInsets.all(24.0),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(Icons.assignment,
+                              size: 80, color: Colors.grey[300]),
+                          const SizedBox(height: 16),
+                          Text(
+                            _searchController.text.isEmpty
+                                ? 'Belum ada tugas di sini!'
+                                : 'Tidak ada tugas yang cocok dengan pencarian Anda.',
+                            style: const TextStyle(
+                                fontSize: 18, color: Colors.grey),
+                            textAlign: TextAlign.center,
+                          ),
+                          const SizedBox(height: 8),
+                          Text(
+                            _searchController.text.isEmpty
+                                ? 'Coba kata kunci lain atau tambahkan tugas baru.'
+                                : 'Coba kata kunci lain atau tambahkan tugas baru.',
+                            style: const TextStyle(
+                                fontSize: 14, color: Colors.grey),
+                            textAlign: TextAlign.center,
+                          ),
+                        ],
+                      ),
+                    ),
+                  )
+                : ListView.builder(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemCount: _filteredTasks.length,
+                    itemBuilder: (context, index) {
+                      final task = _filteredTasks[index];
+                      return _buildTaskItem(
+                        title: task.title,
+                        category: task.category,
+                        time: task.time,
+                        status: task.status,
+                        statusColor: task.statusColor,
+                      );
+                    },
+                  ),
           ],
         ),
       ),

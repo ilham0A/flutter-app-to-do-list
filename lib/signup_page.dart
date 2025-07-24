@@ -215,11 +215,10 @@ class _SignUpPageState extends State<SignUpPage> {
                             color: Colors.blue[800],
                             decoration: TextDecoration.underline,
                           ),
-                          recognizer:
-                              TapGestureRecognizer()
-                                ..onTap = () {
-                                  print('Terms of Service tapped');
-                                },
+                          recognizer: TapGestureRecognizer()
+                            ..onTap = () {
+                              print('Terms of Service tapped');
+                            },
                         ),
                         const TextSpan(
                           text: ' and ',
@@ -231,11 +230,10 @@ class _SignUpPageState extends State<SignUpPage> {
                             color: Colors.blue[800],
                             decoration: TextDecoration.underline,
                           ),
-                          recognizer:
-                              TapGestureRecognizer()
-                                ..onTap = () {
-                                  print('Privacy Policy tapped');
-                                },
+                          recognizer: TapGestureRecognizer()
+                            ..onTap = () {
+                              print('Privacy Policy tapped');
+                            },
                         ),
                       ],
                     ),
@@ -247,20 +245,17 @@ class _SignUpPageState extends State<SignUpPage> {
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
-                onPressed:
-                    _agreeToTerms
-                        ? () {
-                          print('Create Account button pressed');
-                          Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                              builder:
-                                  (context) =>
-                                      const SignInPage(), // Diarahkan ke SignInPage
-                            ),
-                          );
-                        }
-                        : null,
+                onPressed: _agreeToTerms
+                    ? () {
+                        print('Create Account button pressed');
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const SignInPage(),
+                          ),
+                        );
+                      }
+                    : null,
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.blue[800],
                   padding: const EdgeInsets.symmetric(vertical: 16),

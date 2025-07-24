@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:google_nav_bar/google_nav_bar.dart'; // Pastikan Anda sudah menambahkan google_nav_bar di pubspec.yaml
+import 'package:google_nav_bar/google_nav_bar.dart';
 
 class CustomBottomNavBar extends StatelessWidget {
   final int selectedIndex;
@@ -27,18 +27,16 @@ class CustomBottomNavBar extends StatelessWidget {
             rippleColor: Colors.grey[300]!,
             hoverColor: Colors.grey[100]!,
             gap: 8,
-            activeColor: Colors.blue[800], // Warna ikon aktif
+            activeColor: Colors.blue[800],
             iconSize: 24,
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
             duration: const Duration(milliseconds: 400),
             tabBackgroundColor: Colors.blue[100]!,
-            color: Colors.grey[600], // Warna ikon tidak aktif
+            color: Colors.grey[600],
             tabs: const [
               GButton(icon: Icons.home, text: 'Home'),
-              // Ini adalah tombol 'Add' yang Anda definisikan.
-              // Jika ada tanda '+' hitam lain, itu kemungkinan dari FloatingActionButton di Scaffold induk.
               GButton(
-                icon: Icons.add_circle, // Gunakan ikon ini untuk tombol tengah
+                icon: Icons.add_circle,
                 text: 'Add',
               ),
               GButton(icon: Icons.person, text: 'Profile'),

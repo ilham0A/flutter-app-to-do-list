@@ -246,35 +246,33 @@ class _AddTaskPageState extends State<AddTaskPage> {
             Wrap(
               spacing: 10.0,
               runSpacing: 10.0,
-              children:
-                  _categories.map((category) {
-                    bool isSelected = _selectedCategory == category;
-                    return GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          _selectedCategory = category;
-                        });
-                      },
-                      child: Container(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 12,
-                          vertical: 8,
-                        ),
-                        decoration: BoxDecoration(
-                          color:
-                              isSelected ? Colors.blue[800] : Colors.grey[200],
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        child: Text(
-                          category,
-                          style: TextStyle(
-                            color: isSelected ? Colors.white : Colors.black,
-                            fontSize: 14,
-                          ),
-                        ),
+              children: _categories.map((category) {
+                bool isSelected = _selectedCategory == category;
+                return GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      _selectedCategory = category;
+                    });
+                  },
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 12,
+                      vertical: 8,
+                    ),
+                    decoration: BoxDecoration(
+                      color: isSelected ? Colors.blue[800] : Colors.grey[200],
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: Text(
+                      category,
+                      style: TextStyle(
+                        color: isSelected ? Colors.white : Colors.black,
+                        fontSize: 14,
                       ),
-                    );
-                  }).toList(),
+                    ),
+                  ),
+                );
+              }).toList(),
             ),
             const SizedBox(height: 40),
             SizedBox(
